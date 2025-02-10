@@ -4,9 +4,42 @@
 <h1>Contact Us Form</h1>
 <form method="POST">
     <div>
-        <label>Name:</label>
-        <input type="text" class="form-control"/>
+        <label>Full Name:</label>
+        <input type="text" class="form-control" name="fullName" />
     </div>
+    <div>
+        <label>Email:</label>
+        <input type="text" class="form-control" name="email" />
+    </div>
+    <div>
+        <label>Saluations</label>
+
+        <label>Mr.</label>
+        <input type="radio" value="mrs" name="saluation" />
+
+        <label>Mrs.</label>
+        <input type="radio" value="mr" name="saluation" />
+
+        <label>Ms.</label>
+        <input type="radio" value="ms" name="saluation" />
+    </div>
+    <div>
+        <label>What kind of fortunes are you interested in?</label>
+    
+        <label>Horoscope</label>
+        <input type="checkbox" name="fortune" value="horoscope"/>
+
+        <label>Business</label>
+        <input type="checkbox" name="fortune" value="business"/>
+
+        <label>Fengshui</label>
+        <input type="checkbox" name="fortune" value="fengshui"/>
+
+        <label>Love</label>
+        <input type="checkbox" name="fortune" value="love"/>
+
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary mt-3" />
 </form>
 {{/block}}
 

@@ -14,6 +14,11 @@ waxOn.on(hbs.handlebars); // enable wax-on for handlebars
 // layout file is a template that other templates can "copy" from
 waxOn.setLayoutPath('./views/layouts');
 
+// enable form processing
+app.use(express.urlencoded({
+    extended: false // disable advanced optional features that slow down express
+}));
+
 // a route is a URL mapped to a JavaScript function
 // when the Express server recieves a request for the URL,
 // it will the corresponding function
@@ -36,8 +41,35 @@ app.get('/about-us', function(req,res){
     res.render('about-us')
 })
 
+// one route to display the form (usually using GET)
 app.get('/contact-us', function(req,res){
     res.render("contact-us");
+})
+
+// one route to recieve the form (usually using POST)
+app.post('/contact-us', function(req,res){
+    // the content of the form will be in req.body
+    console.log(req.body);
+
+    // how to manage checkboxes
+    // 1. if the user never selects any checkbox, default to an empty array
+    let selectedFortune = null;
+    if (req.body.fortune) {
+        // two  possible cases:
+        // 2. user selects only one checkbox
+        // 3. user selects more than one checkbox
+        if (Array.isArray(req.body.fortune)) {
+            // assign the array to selectedFortune
+            selectedFortune = req.body.fortune;
+        } else {
+            selectedFortune = [ req.body.fortune ];
+        }
+
+    } else {
+        selectedFortune = [];
+    }
+    console.log("selected fortune =", selectedFortune);
+    res.send("form recieved");
 })
 
 app.get('/luckynumber', function(req,res){
