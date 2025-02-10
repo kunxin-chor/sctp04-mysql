@@ -1,11 +1,18 @@
 const express = require('express');
 const app = express();
+const hbs = require('hbs');
+const waxOn = require('wax-on');
 
 // setup express to use hbs
-const hbs = require('hbs');
 app.set('view engine', 'hbs') // --> tells Express that we are using HBS
                               // as our view engine (template -> a method for Express to send
                              // the content of an entire file)
+
+waxOn.on(hbs.handlebars); // enable wax-on for handlebars
+
+// which folder to the find layout files
+// layout file is a template that other templates can "copy" from
+waxOn.setLayoutPath('./views/layouts');
 
 // a route is a URL mapped to a JavaScript function
 // when the Express server recieves a request for the URL,
@@ -13,7 +20,7 @@ app.set('view engine', 'hbs') // --> tells Express that we are using HBS
 app.get('/', function(req,res){
     // req: what the browser/client is sending to the server
     // res: what the server is going to send back to the client
-    res.send("hello world");
+    res.render("home");
 
 });
 
@@ -30,7 +37,7 @@ app.get('/about-us', function(req,res){
 })
 
 app.get('/contact-us', function(req,res){
-    res.send("Contact Us");
+    res.render("contact-us");
 })
 
 app.get('/luckynumber', function(req,res){
